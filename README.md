@@ -8,13 +8,13 @@ receive NMEA sentences. We will build and test it against the F´ GDS ground sys
 
 ## Prerequisites
 
-This tutorial assumes the user has gone through and understands the 
+This tutorial assumes you have gone through and understand the 
 HelloWorld Tutorial 
 <https://fprime.jpl.nasa.gov/latest/tutorials-hello-world/docs/hello-world/> 
 and the MathComponent Tutorial 
 <https://fprime.jpl.nasa.gov/latest/tutorials-math-component/docs/math-component/>.
 
-This tutorial requires the user to have some basic software skills and
+This tutorial also requires you to have some basic software skills and
 to have installed F´. The prerequisite skills to understand this tutorial
 are:
 
@@ -22,7 +22,7 @@ are:
     programs
  2. An understanding of C++, including class declarations and inheritance
 
-In order to fully benefit from this tutorial, the user
+In order to fully benefit from this tutorial, you 
 should acquire a GPS receiver connected to the host computer via UART 
 (or USB that appears as a 
 /dev/ttyxxx).  The GPS receiver should emit standard NMEA sentences 
@@ -34,7 +34,7 @@ Installation of F' can be done by following the instructions in the
 HelloWorld Tutorial 
 https://fprime.jpl.nasa.gov/latest/tutorials-hello-world/docs/hello-world/.
 That tutorial will
-walk the user through the installation process and verify the
+walk you through the installation process and verify the
 installation.
 
 For the rest of this tutorial we'll assume you named your project **GpsProject**.
@@ -496,15 +496,12 @@ fprime-util build
 ## Ready to deploy
 
 We are ready to create a deployment to connect the GPS component 
-to the standard F´ components. A general system diagram is shown below.
+to the standard F´ components. 
 
-// TODO \![GPS App Topology Diagram](./docs/img/gps-top.png)
-
-There are many components that come “for free” from the autocoder. 
-However, the key components that represent our
-application’s flow are shown in the diagram. We will make sure that all 
-of our ports for the Gps component  exist and have been hooked-up. This involves
-two steps:
+There are many components that come “for free” from F'. 
+We will make sure that all of our ports for the Gps component exist 
+and have been connected to the correct ports on standard F'
+components. This involves two steps:
 
  1. Instantiate ```LinuxUartDriver``` and ```Gps``` components
  2. Add new port connections to wire the ```Gps``` and ```LinuxUartTDriver```
@@ -680,9 +677,14 @@ by using _CTRL-C_ to kill the processes.
 
 This GPS Tutorial has shown us how to create a component that 
 supports a very common hardware device used in almost every mission.  
-We have seen how to add components and wire
-them to existing drivers, and we’ve seen how to run the ground system and
-collect data from our new component.  Well done!
+We have seen how to add components and wire them to existing drivers, 
+and we’ve seen how to run the ground system and collect data from 
+our new component.  
+
+**Well done!**
+
+Thanks to all those who've worked on this tutorial over the years:
+Joshua-Anderson, r9-pena, LeStarch, and thomas-bc.
 
 © 2025 California Institute of Technology. Government sponsorship
 acknowledged.
