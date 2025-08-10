@@ -1,6 +1,6 @@
 // ======================================================================
 // \title  Gps.cpp
-// \author lestarch and Mike McPherson
+// \author kq9p
 // \brief  cpp file for Gps component implementation class
 //
 // The F' component implements a GPS receiver that processes NMEA 
@@ -16,43 +16,36 @@
 
 namespace Gps {
 
-  // ----------------------------------------------------------------------
-  // Component construction and destruction
-  // ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
+// Component construction and destruction
+// ----------------------------------------------------------------------
 
-  Gps ::
-    Gps(const char* const compName) :
-      GpsComponentBase(compName)
-  { 
+Gps ::Gps(const char* const compName) : GpsComponentBase(compName) 
+
+{
     m_numSentences = 0; //!< Number of NMEA sentences received
     memset(m_sentenceBuffer, 0, sizeof(m_sentenceBuffer));
 }
 
-  Gps ::
-    ~Gps()
-  {
+Gps ::~Gps() {}
 
-  }
+// ----------------------------------------------------------------------
+// Handler implementations for typed input ports
+// ----------------------------------------------------------------------
 
-  // ----------------------------------------------------------------------
-  // Handler implementations for typed input ports
-  // ----------------------------------------------------------------------
-
-  void Gps ::
-    GpsRecv_handler(
-        FwIndexType portNum,
-        Fw::Buffer& recvBuffer,
-        const Drv::RecvStatus& recvStatus
-    )
-  {
+void Gps ::GpsRecv_handler(
+    FwIndexType portNum, 
+    Fw::Buffer& recvBuffer, 
+    const Drv::ByteStreamStatus& recvStatus) 
+{
     // Check the receive status
-    if(recvStatus == Drv::RecvStatus::RECV_NO_DATA)
+    if(recvStatus == Drv::ByteStreamStatus::RECV_NO_DATA)
     {
       // Handle no data case
       Fw::Logger::log("No data received on port %d\n", portNum);
       this->deallocate_out(0, recvBuffer);// Return the buffer to the deallocate port
       return;
-    } else if(recvStatus != Drv::RecvStatus::RECV_OK)
+    } else if(recvStatus != Drv::ByteStreamStatus::OP_OK)
     {
       // Handle error case
       Fw::Logger::log("Receive error on port %d, recvStatus: %d\n", portNum, recvStatus);
@@ -131,19 +124,17 @@ namespace Gps {
     }
     // Return the buffer to the deallocate port
     this->deallocate_out(0, recvBuffer);
-  }
+}
 
-  // ----------------------------------------------------------------------
-  // Handler implementations for commands
-  // ----------------------------------------------------------------------
+// ----------------------------------------------------------------------
+// Handler implementations for commands
+// ----------------------------------------------------------------------
 
-  void Gps ::
-    GpsEnable_cmdHandler(
-        FwOpcodeType opCode,
-        U32 cmdSeq,
-        Fw::On newStatus
-    )
-  {
+void Gps ::GpsEnable_cmdHandler(
+    FwOpcodeType opCode, 
+    U32 cmdSeq, 
+    Fw::On newStatus) 
+{
     // Save the new Gps enabled status
     m_GpsEnabled = newStatus;
     if(m_GpsEnabled == Fw::On::OFF) {
@@ -161,6 +152,6 @@ namespace Gps {
     // Log the Gps state change
     this->log_ACTIVITY_HI_GpsState(m_GpsEnabled);
     this->cmdResponse_out(opCode, cmdSeq, Fw::CmdResponse::OK);
-  }
-
 }
+
+}  // namespace Gps

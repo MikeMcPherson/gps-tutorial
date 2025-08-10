@@ -23,7 +23,7 @@ module Gps {
         event fixValidity(valid: Fw.On) severity activity high id 2 format "GPS fix validity changed to: {}"
 
         @ Port to receive GPS data
-        async input port GpsRecv: Drv.ByteStreamRecv
+        async input port GpsRecv: Drv.ByteStreamData
         @ Port to send GPS commands
         output port GpsSend: Drv.ByteStreamSend
         @ Port to return buffers for deallocation

@@ -6,6 +6,8 @@ telemetry, and log events. We will create a deployment for the
 Component in which it will be wired to a standard UART driver in order to
 receive NMEA sentences. We will build and test it against the F´ GDS ground system.
 
+__[This tutorial has been updated for F' v4.x.]__
+
 ## Prerequisites
 
 This tutorial assumes you have gone through and understand the 
