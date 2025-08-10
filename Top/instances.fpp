@@ -47,7 +47,7 @@ module gpsDeploy {
     priority 117
 
   @ GPS component instance
-  instance gps: Gps.Gps base id 0x0E00 \
+  instance gps: Gps.Gps base id 0x10005000 \
     queue size Default.QUEUE_SIZE \
     stack size Default.STACK_SIZE \
     priority 95
@@ -68,9 +68,10 @@ module gpsDeploy {
   instance systemResources: Svc.SystemResources base id 0x10012000
 
   instance timer: Svc.LinuxTimer base id 0x10013000
+
   instance comDriver: Drv.TcpClient base id 0x10014000
 
-  instance bufferManager: Svc.BufferManager base id 0x4400 \
+  instance bufferManager: Svc.BufferManager base id 0x10015000 \
   {
     phase Fpp.ToCpp.Phases.configComponents """
     Fw::MallocAllocator m_allocator;
@@ -90,7 +91,7 @@ module gpsDeploy {
   }
 
   @ UART driver instance. Configured to use a Linux UART driver
-  instance uartDrv: Drv.LinuxUartDriver base id 0x0F00 \
+  instance uartDrv: Drv.LinuxUartDriver base id 0x10016000 \
   {
     phase Fpp.ToCpp.Phases.configComponents """
       const bool status = uartDrv.open("/dev/ttyACM0",
