@@ -1,6 +1,6 @@
 // ======================================================================
 // \title  Gps.hpp
-// \author kq9p
+// \author Michael Starch and Mike McPherson
 // \brief  hpp file for Gps component implementation class
 // 
 // The F' component implements a GPS receiver that processes NMEA 
